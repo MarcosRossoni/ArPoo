@@ -22,6 +22,7 @@ public class TelaSistema extends JFrame {
         jmCadastros.add(jmiEstado);
         jmCadastros.add(jmiCidade);
         jmCadastros.add(jmiFornecedor);
+        setJMenuBar(jmb);
         setVisible(true);
     }
 }
