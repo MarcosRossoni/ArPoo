@@ -1,9 +1,12 @@
 package tela;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class TelaSistema extends JFrame {
+public class TelaSistema extends JFrame implements ActionListener {
 
+    public JDesktopPane jdp = new JDesktopPane();
     public JMenuBar jmb = new JMenuBar();
     public JMenu jmCadastros = new JMenu("Cadastros");
     public JMenu jmMovimentos = new JMenu("Movimentos");
@@ -13,16 +16,33 @@ public class TelaSistema extends JFrame {
     public JMenuItem jmiFornecedor = new JMenuItem("Fornecedor");
 
     public TelaSistema() {
+        getContentPane().add(jdp);
         setTitle("Meu Sistema");
         setExtendedState(MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setJMenuBar(jmb);
         jmb.add(jmCadastros);
         jmb.add(jmMovimentos);
         jmb.add(jmRelatorios);
         jmCadastros.add(jmiEstado);
         jmCadastros.add(jmiCidade);
         jmCadastros.add(jmiFornecedor);
-        setJMenuBar(jmb);
+        jmiEstado.addActionListener(this);
+        jmiCidade.addActionListener(this);
+        jmiFornecedor.addActionListener(this);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource().equals(jmiEstado)){
+            TelaCadastroEstado telaCadastroEstado = new TelaCadastroEstado();
+            jdp.add(telaCadastroEstado);
+        } else if (ae.getSource().equals(jmiCidade)){
+            TelaCadastroCidade telaCadastroCidade = new TelaCadastroCidade();
+            jdp.add(telaCadastroCidade);
+        } else if (ae.getSource().equals(jmiFornecedor)) {
+            System.out.println("Fornecedor foi clicado");
+        }
     }
 }
