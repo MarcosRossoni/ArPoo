@@ -1,14 +1,18 @@
 package tela;
 
+import componente.MeuComponente;
 import enumeration.EstadoTela;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TelaCadastro extends JInternalFrame implements ActionListener {
 
+    public List<MeuComponente> componentes = new ArrayList<>();
     public JPanel jpBotoes = new JPanel();
     public JPanel jpComponentes = new JPanel();
     public JButton jbIncluir = new JButton("Incluir");
@@ -32,14 +36,29 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         habilitaBotoes();
     }
 
-    public void adicionaComponente(int linha, int coluna, int linhas, int colunas, JComponent jComponent){
+    public void adicionaComponente(int linha, int coluna, int linhas, int colunas, JComponent componente){
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = coluna;
         gbc.gridy = linha;
         gbc.gridheight = linhas;
         gbc.gridwidth = colunas;
         gbc.anchor = GridBagConstraints.WEST;
-        jpComponentes.add(jComponent, gbc);
+        jpComponentes.add(componente, gbc);
+        if (componente instanceof MeuComponente){
+            componentes.add((MeuComponente) componente);
+        }
+    }
+
+    public void habilitaComponentes(boolean status){
+        for (MeuComponente componente : componentes) {
+            componente.habilitar(status);
+        }
+    }
+
+    public void limpaComponentes(){
+        for (MeuComponente componente : componentes) {
+            componente.limpar();
+        }
     }
 
     public void habilitaBotoes() {
