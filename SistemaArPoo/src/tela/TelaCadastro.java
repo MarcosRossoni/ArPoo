@@ -77,7 +77,7 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
             incluir();
         } else if (ae.getSource().equals(jbAlterar)){
             alterar();
-        } else if (ae.getSource().equals(jbIncluir)){
+        } else if (ae.getSource().equals(jbExcluir)){
             excluir();
         } else if (ae.getSource().equals(jbConsultar)){
             consultar();
@@ -91,10 +91,13 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 
     public void incluir(){
         fgEstadoTela = EstadoTela.INCLUINDO;
+        limpaComponentes();
+        habilitaComponentes(true);
     }
 
     public void alterar(){
         fgEstadoTela = EstadoTela.ALTERANDO;
+        habilitaComponentes(true);
     }
 
     public void excluir(){
@@ -103,14 +106,42 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
 
     public void consultar(){
         fgEstadoTela = EstadoTela.CONSULTANDO;
+        habilitaBotoes();
     }
 
     public void confirmar(){
+        if (fgEstadoTela == EstadoTela.INCLUINDO){
+            incluirBD();
+        } else if (fgEstadoTela == EstadoTela.ALTERANDO){
+            alterarBD();
+        } else if (fgEstadoTela == EstadoTela.EXCLUINDO){
+            excluirBD();
+        }
         fgEstadoTela = EstadoTela.PADRAO;
+        habilitaComponentes(false);
+        habilitaBotoes();
     }
 
     public void cancelar(){
         fgEstadoTela = EstadoTela.PADRAO;
+    }
+
+    public void incluirBD(){
+
+    }
+
+    public void alterarBD(){
+
+    }
+
+    public void excluirBD(){
+        limpaComponentes();
+    }
+
+    public void preencherDados(int pk){
+        fgEstadoTela = EstadoTela.PADRAO;
+        fgTemDados = true;
+        habilitaBotoes();
     }
 
     public void criarBotoes(){

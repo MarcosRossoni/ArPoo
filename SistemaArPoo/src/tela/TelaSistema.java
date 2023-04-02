@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 
 public class TelaSistema extends JFrame implements ActionListener {
 
-    public JDesktopPane jdp = new JDesktopPane();
+    public static JDesktopPane jdp = new JDesktopPane();
     public JMenuBar jmb = new JMenuBar();
     public JMenu jmCadastros = new JMenu("Cadastros");
     public JMenu jmMovimentos = new JMenu("Movimentos");
