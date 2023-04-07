@@ -40,6 +40,17 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = coluna;
         gbc.gridy = linha;
+        if (componente instanceof MeuComponente){
+            gbc.gridheight = 1;
+            gbc.gridwidth = 1;
+            String texto = "<html><body>";
+            texto = texto + ((MeuComponente) componente).getDica() + ":";
+            texto = ((MeuComponente) componente).obrigatorio() ? texto.concat("<font color=red>* </font>") : texto.concat(" ");
+            JLabel jl = new JLabel(texto);
+            gbc.anchor = GridBagConstraints.EAST;
+            jpComponentes.add(jl, gbc);
+            gbc.gridx++;
+        }
         gbc.gridheight = linhas;
         gbc.gridwidth = colunas;
         gbc.anchor = GridBagConstraints.WEST;
@@ -110,13 +121,19 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
     }
 
     public void confirmar(){
-        if (fgEstadoTela == EstadoTela.INCLUINDO){
+        if (fgEstadoTela == EstadoTela.INCLUINDO && validaComponentes()){
             incluirBD();
-        } else if (fgEstadoTela == EstadoTela.ALTERANDO){
+            habilitaItens();
+        } else if (fgEstadoTela == EstadoTela.ALTERANDO && validaComponentes()){
             alterarBD();
+            habilitaItens();
         } else if (fgEstadoTela == EstadoTela.EXCLUINDO){
             excluirBD();
+            habilitaItens();
         }
+    }
+
+    public void habilitaItens(){
         fgEstadoTela = EstadoTela.PADRAO;
         habilitaComponentes(false);
         habilitaBotoes();
@@ -162,5 +179,21 @@ public class TelaCadastro extends JInternalFrame implements ActionListener {
         jbConsultar.addActionListener(this);
         jbConfirmar.addActionListener(this);
         jbCancelar.addActionListener(this);
+    }
+
+    public boolean validaComponentes(){
+        String erroObrigatorio = "";
+
+        for (MeuComponente componente : componentes) {
+            if (componente.obrigatorio() && componente.fgVazio()) {
+                erroObrigatorio = erroObrigatorio + componente.getDica() + "\n";
+            }
+        }
+        if (erroObrigatorio.isEmpty()){
+            return true;
+        }
+
+        JOptionPane.showMessageDialog(null, "Os campos abaixo são obrigatorios e não foram preenchidos: \n\n" + erroObrigatorio);
+        return false;
     }
 }

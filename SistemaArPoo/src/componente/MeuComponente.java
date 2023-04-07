@@ -1,7 +1,9 @@
 package componente;
 
 public interface MeuComponente {
-    public boolean fgVazio();
-    public void limpar();
-    public void habilitar(boolean status);
+    boolean obrigatorio();
+    boolean fgVazio();
+    String getDica();
+    void limpar();
+    void habilitar(boolean status);
 }

@@ -14,6 +14,7 @@ public class EstadoDAO {
     private final String SQL_EXCLUIR = "DELETE FROM ESTADO WHERE ID = ?";
     private final String SQL_CONSULTAR = "SELECT * FROM ESTADO WHERE ID = ?";
     public static final String SQL_PESQUISAR = "SELECT * FROM ESTADO ORDER BY ID";
+    public static final String SQL_COMBOBOX = "SELECT ID, NOME FROM ESTADO ORDER BY NOME";
     private Estado estado;
 
     public EstadoDAO(Estado estado){

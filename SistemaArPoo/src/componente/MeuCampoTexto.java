@@ -6,7 +6,11 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 public class MeuCampoTexto extends JTextField implements FocusListener, MeuComponente {
-    public MeuCampoTexto(int colunas){
+    private String dica;
+    private boolean obrigatorio;
+    public MeuCampoTexto(int colunas, String dica, boolean obrigatorio){
+        this.obrigatorio = obrigatorio;
+        this.dica = dica;
         setColumns(colunas);
         addFocusListener(this);
     }
@@ -22,6 +26,11 @@ public class MeuCampoTexto extends JTextField implements FocusListener, MeuCompo
     }
 
     @Override
+    public boolean obrigatorio() {
+        return obrigatorio;
+    }
+
+    @Override
     public boolean fgVazio() {
         return getText().trim().isEmpty();
     }
@@ -34,5 +43,9 @@ public class MeuCampoTexto extends JTextField implements FocusListener, MeuCompo
     @Override
     public void habilitar(boolean status) {
         setEnabled(status);
+    }
+
+    public String getDica(){
+        return dica;
     }
 }

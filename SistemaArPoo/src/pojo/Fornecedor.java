@@ -1,5 +1,6 @@
 package pojo;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Fornecedor {
@@ -16,11 +17,11 @@ public class Fornecedor {
 
     private String cep;
 
-    private Date cadastro;
+    private LocalDate cadastro;
 
     private String ativo;
 
-    private Cidade idCidade;
+    private Cidade cidade = new Cidade();
 
     public int getId() {
         return id;
@@ -70,11 +71,11 @@ public class Fornecedor {
         this.cep = cep;
     }
 
-    public Date getCadastro() {
+    public LocalDate getCadastro() {
         return cadastro;
     }
 
-    public void setCadastro(Date cadastro) {
+    public void setCadastro(LocalDate cadastro) {
         this.cadastro = cadastro;
     }
 
@@ -86,11 +87,11 @@ public class Fornecedor {
         this.ativo = ativo;
     }
 
-    public Cidade getIdCidade() {
-        return idCidade;
+    public Cidade getCidade() {
+        return cidade;
     }
 
-    public void setIdCidade(Cidade idCidade) {
-        this.idCidade = idCidade;
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
     }
 }

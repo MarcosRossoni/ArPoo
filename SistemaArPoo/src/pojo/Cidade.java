@@ -8,7 +8,7 @@ public class Cidade {
 
     private String ativo;
 
-    private Estado idEstado;
+    private Estado estado = new Estado();
 
     public int getId() {
         return id;
@@ -34,11 +34,11 @@ public class Cidade {
         this.ativo = ativo;
     }
 
-    public Estado getIdEstado() {
-        return idEstado;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setIdEstado(Estado idEstado) {
-        this.idEstado = idEstado;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 }

@@ -42,7 +42,8 @@ public class TelaSistema extends JFrame implements ActionListener {
             TelaCadastroCidade telaCadastroCidade = new TelaCadastroCidade();
             jdp.add(telaCadastroCidade);
         } else if (ae.getSource().equals(jmiFornecedor)) {
-            System.out.println("Fornecedor foi clicado");
+            TelaCadastroFornecedor telaCadastroFornecedor = new TelaCadastroFornecedor();
+            jdp.add(telaCadastroFornecedor);
         }
     }
 }
